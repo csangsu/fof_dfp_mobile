@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 70 70">
+    <g transform="translate(-197.411 -648)">
+        <rect width="70" height="70" rx="16" transform="translate(197.411 648)" style="fill:#f3f4f6"/>
+        <path data-name="패스 18911" d="M711.546 726.824a24.99 24.99 0 0 0-.4-4.457h-20.54v8.433h11.737a10.025 10.025 0 0 1-4.352 6.578v5.467h7.048c4.125-3.794 6.5-9.38 6.5-16.017z" transform="translate(-457.388 -43.537)" style="fill-rule:evenodd;fill:#3e82f1"/>
+        <path data-name="패스 18912" d="M686.846 749.686a20.83 20.83 0 0 0 14.433-5.28l-7.048-5.467a13.163 13.163 0 0 1-19.589-6.9h-7.286v5.647a21.8 21.8 0 0 0 19.49 12.005z" transform="translate(-453.625 -45.101)" style="fill:#32a753;fill-rule:evenodd"/>
+        <path data-name="패스 18913" d="M674.194 729.345a12.875 12.875 0 0 1 0-8.281v-5.646h-7.286a21.8 21.8 0 0 0 0 19.574l7.286-5.647z" transform="translate(-453.177 -42.412)" style="fill:#f9bb00;fill-rule:evenodd"/>
+        <path data-name="패스 18914" d="M686.846 709.761a11.789 11.789 0 0 1 8.337 3.259l6.255-6.25a20.973 20.973 0 0 0-14.592-5.676 21.8 21.8 0 0 0-19.49 12.006l7.286 5.646a13 13 0 0 1 12.2-8.984z" transform="translate(-453.625 -40.094)" style="fill:#e74133;fill-rule:evenodd"/>
+    </g>
+</svg>
