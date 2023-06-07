@@ -16,6 +16,7 @@ build
 .dart_tool
 .flutter-plugins
 .flutter-plugins-dependencies
+pubspec.lock
 
 # Editor directories and files
 !.vscode/extensions.json
