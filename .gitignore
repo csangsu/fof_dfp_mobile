@@ -1,47 +1,52 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
+# IDE-related
+.idea/
+.vscode/
 
-node_modules
-dist
-dist-ssr
-build
-.env.development
-.env.production
-.dart_tool
+# Flutter/Dart-specific
+**/build/
+**/ios/Pods/
+**/android/build/
+.dart_tool/
 .flutter-plugins
 .flutter-plugins-dependencies
-pubspec.lock
+.packages
+.pub-cache/
+.pub/
 
-# Editor directories and files
-!.vscode/extensions.json
-.idea
-.DS_Store
-.pnp.cjs
-.pnp.loader.mjs
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+# Android-specific
+**/android/gradle/
+**/android/gradlew
+**/android/local.properties
+**/android/.gradle
+**/android/captures/
+
+# iOS-specific
+**/ios/Pods/
+**/ios/.symlinks/
+**/ios/.flutter-plugins
+**/ios/Flutter/Debug.xcconfig
+**/ios/Flutter/Release.xcconfig
+**/ios/Runner.xcworkspace
+**/ios/Flutter/AppFrameworkInfo.plist
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/App.framework/
+**/ios/Flutter/Flutter.framework/
+**/ios/Flutter/Flutter.podspec
+**/ios/Flutter/GeneratedPluginRegistrant.*
+
+# Other
 *.iml
+*.lock
+.DS_Store
+*.pbxproj
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+*.xccheckout
+*.xcworkspace
+*.swp
+*~
 
-
-.yarn/cache
-.yarn/install-state.gz
-# .yanrc.yml의 경우 buildspec에서 yarn set version 명령을 실행하는데도 필요하고, 개발자 초기 개발환경 셋팅에도 필요하므로, ignore 하지 않는다.
-# .yarnrc.yml
-
-# yarn 3.2.3 을 사용하도록 공식 가이드하고 있기 때문에, 로컬에서 잘못 생성된 package-lock.json 에 대한 형상관리는 하지 않는다.
-package-lock.json
-
-# 빌드 후 압축한 파일
-fof-dfp-frontend.tgz
-fof-dfp-frontend.zip
-
-tsconfig.tsbuildinfo
+.env.development
+.env.production
