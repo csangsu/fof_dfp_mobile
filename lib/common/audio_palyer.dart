@@ -6,7 +6,7 @@ class AssertsPalyer {
   static void playAssert({required String audioFileName}) async {
     var logger = Logger();
     await player!.stop();
-    await player!.setAsset(audioFileName).then(
+    player!.setAsset(audioFileName).then(
       (state) {
         return {
           player!.playerStateStream.listen((state) {
@@ -32,6 +32,7 @@ class AssertsPalyer {
               }
             }
           }),
+          player!.play(),
         };
       },
     );

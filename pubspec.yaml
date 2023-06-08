@@ -78,6 +78,7 @@ flutter:
     - .env.development
     - .env.production
     - assets/audio/
+    - assets/audio/beep.mp3
     - assets/images/quiz-logo.png
     - assets/images/vheld_logo.png
     - assets/images/vheld_logo.svg
