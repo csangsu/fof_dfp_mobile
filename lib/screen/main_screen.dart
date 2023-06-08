@@ -1,12 +1,17 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:fof_dfp_mobile/common/audio_palyer.dart';
 import 'package:fof_dfp_mobile/common/gex_controller/getx_manager.dart';
 import 'package:fof_dfp_mobile/common/gex_controller/location_controller.dart';
 import 'package:fof_dfp_mobile/common/gex_controller/login_controller.dart';
 import 'package:fof_dfp_mobile/common/location_manager.dart';
+import 'package:fof_dfp_mobile/main.dart';
 import 'package:fof_dfp_mobile/widget/common/login_info.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:logger/logger.dart';
 
 class MainScreen extends StatefulWidget {
@@ -21,6 +26,11 @@ class _MainScreenState extends State<MainScreen> {
   var logger = Logger();
   var locationController = GetXManager.getLocationController();
 
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   Future<void> doGetLocation() async {
     Position position = await LocationManager.getCurrentLocation();
     locationController.setLatitude(position.longitude);
@@ -31,7 +41,7 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    String txtButon = 'Start Location';
+    String txtButon = 'Play Sound';
 
     return SingleChildScrollView(
       child: Column(
@@ -124,8 +134,36 @@ class _MainScreenState extends State<MainScreen> {
               ),
               child: TextButton(
                 onPressed: () async {
-                  await doGetLocation();
-                  // ScreenHandler.openScreen(context, LoginScreen.screenName);
+                  AssertsPalyer.playAssert(
+                      audioFileName: 'assets/audio/beep.mp3');
+                  // player!.setAsset('assets/audio/beep.mp3').then((state) {
+                  //   return {
+                  //     player!.playerStateStream.listen((state) {
+                  //       if (state.playing) {
+                  //         logger.i('Audio Palying');
+                  //       } else {
+                  //         switch (state.processingState) {
+                  //           case ProcessingState.idle:
+                  //             logger.i('Audio idle');
+                  //             break;
+                  //           case ProcessingState.loading:
+                  //             logger.i('Audio loading');
+                  //             break;
+                  //           case ProcessingState.buffering:
+                  //             logger.i('Audio buffering');
+                  //             break;
+                  //           case ProcessingState.ready:
+                  //             logger.i('Audio ready');
+                  //             break;
+                  //           case ProcessingState.completed:
+                  //             logger.i('Audio completed');
+                  //             break;
+                  //         }
+                  //       }
+                  //     }),
+                  //     player!.play(),
+                  //   };
+                  // });
                 },
                 child: Text(
                   txtButon,

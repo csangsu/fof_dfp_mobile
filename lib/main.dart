@@ -10,10 +10,13 @@ import 'package:fof_dfp_mobile/common/location_manager.dart';
 import 'package:fof_dfp_mobile/fof_dfp_mobile.dart';
 import 'package:fof_dfp_mobile/service/system/login_service.dart';
 import 'package:get/get.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
 import 'package:fof_dfp_mobile/common/environment.dart';
 import 'package:logger/logger.dart';
+
+AudioPlayer? player;
 
 void main() async {
   await dotenv.load(fileName: Environment.envFileName);
@@ -28,6 +31,9 @@ void main() async {
   GetXManager.getLocationController();
   GetXManager.getLoginController();
   initBackgroundService();
+
+  player = AudioPlayer();
+
   runApp(const AppMain());
 }
 
