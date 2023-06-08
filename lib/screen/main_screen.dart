@@ -6,12 +6,10 @@ import 'package:fof_dfp_mobile/common/gex_controller/getx_manager.dart';
 import 'package:fof_dfp_mobile/common/gex_controller/location_controller.dart';
 import 'package:fof_dfp_mobile/common/gex_controller/login_controller.dart';
 import 'package:fof_dfp_mobile/common/location_manager.dart';
-import 'package:fof_dfp_mobile/main.dart';
 import 'package:fof_dfp_mobile/widget/common/login_info.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:just_audio/just_audio.dart';
 import 'package:logger/logger.dart';
 
 class MainScreen extends StatefulWidget {
@@ -85,42 +83,6 @@ class _MainScreenState extends State<MainScreen> {
                   : const SizedBox.shrink();
             },
           ),
-          // StreamBuilder<Map<String, dynamic>?>(
-          //   stream: FlutterBackgroundService().on('update'),
-          //   builder: (context, snapshot) {
-          //     if (!snapshot.hasData) {
-          //       return const SizedBox.shrink();
-          //     }
-
-          //     final data = snapshot.data!;
-
-          //     double? longitude = data["longitude"];
-          //     double? latitude = data["latitude"];
-          //     DateTime? date = DateTime.tryParse(data["current_date"]);
-          //     return Column(
-          //       children: [
-          //         Text(
-          //           'position = $longitude,$latitude',
-          //           style: GoogleFonts.notoSans(
-          //             color: Colors.black,
-          //             fontSize: 17,
-          //             fontWeight: FontWeight.bold,
-          //           ),
-          //           textAlign: TextAlign.center,
-          //         ),
-          //         Text(
-          //           'date = ${date.toString()}',
-          //           style: GoogleFonts.notoSans(
-          //             color: Colors.black,
-          //             fontSize: 17,
-          //             fontWeight: FontWeight.bold,
-          //           ),
-          //           textAlign: TextAlign.center,
-          //         ),
-          //       ],
-          //     );
-          //   },
-          // ),
           Padding(
             padding: const EdgeInsets.only(left: 22, right: 22),
             child: Container(
@@ -136,34 +98,6 @@ class _MainScreenState extends State<MainScreen> {
                 onPressed: () async {
                   AssertsPalyer.playAssert(
                       audioFileName: 'assets/audio/beep.mp3');
-                  // player!.setAsset('assets/audio/beep.mp3').then((state) {
-                  //   return {
-                  //     player!.playerStateStream.listen((state) {
-                  //       if (state.playing) {
-                  //         logger.i('Audio Palying');
-                  //       } else {
-                  //         switch (state.processingState) {
-                  //           case ProcessingState.idle:
-                  //             logger.i('Audio idle');
-                  //             break;
-                  //           case ProcessingState.loading:
-                  //             logger.i('Audio loading');
-                  //             break;
-                  //           case ProcessingState.buffering:
-                  //             logger.i('Audio buffering');
-                  //             break;
-                  //           case ProcessingState.ready:
-                  //             logger.i('Audio ready');
-                  //             break;
-                  //           case ProcessingState.completed:
-                  //             logger.i('Audio completed');
-                  //             break;
-                  //         }
-                  //       }
-                  //     }),
-                  //     player!.play(),
-                  //   };
-                  // });
                 },
                 child: Text(
                   txtButon,
