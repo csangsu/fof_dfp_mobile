@@ -45,6 +45,11 @@ dependencies:
   loader_overlay: ^2.2.0
   flutter_dotenv: ^5.1.0
   geolocator: ^9.0.2
+  flutter_background_service: ^2.4.6
+  flutter_local_notifications: ^14.1.1
+  device_info_plus: ^9.0.2
+  flutter_background_service_android: ^3.0.3
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:
@@ -71,6 +76,7 @@ flutter:
   assets:
     - .env.development
     - .env.production
+    - assets/audio/beep.mp3
     - assets/images/quiz-logo.png
     - assets/images/vheld_logo.png
     - assets/images/vheld_logo.svg

@@ -1,13 +1,11 @@
 import 'package:fof_dfp_mobile/common/constants.dart';
-import 'package:fof_dfp_mobile/common/gex_controller/login_controller.dart';
+import 'package:fof_dfp_mobile/common/gex_controller/getx_manager.dart';
 import 'package:fof_dfp_mobile/common/request/request_handler.dart';
 import 'package:fof_dfp_mobile/common/shared_preferences.dart';
-import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 
 class LoginRequestHandler {
   static Future<void> doAutoLogin() async {
-    Get.put(LoginController());
     bool isAtoLogin = await AppStatus.getBool(kAppStatusIsAutoLogin);
     String usrid = await AppStatus.getString(kAppStatusUserId);
     String password = await AppStatus.getString(kAppStatusPassword);
@@ -23,7 +21,7 @@ class LoginRequestHandler {
       required String pwd,
       required String langType}) async {
     var logger = Logger();
-    var loginController = Get.find<LoginController>();
+    var loginController = GetXManager.getLoginController();
     String urlAddress = '$kBaseUrl/api/v1/login/loginUser';
     Map<String, dynamic> data = {
       'langType': langType,

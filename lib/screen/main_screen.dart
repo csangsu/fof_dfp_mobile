@@ -1,12 +1,9 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:fof_dfp_mobile/common/common_screen.dart';
+import 'package:fof_dfp_mobile/common/gex_controller/getx_manager.dart';
+import 'package:fof_dfp_mobile/common/gex_controller/location_controller.dart';
 import 'package:fof_dfp_mobile/common/gex_controller/login_controller.dart';
 import 'package:fof_dfp_mobile/common/location_manager.dart';
-import 'package:fof_dfp_mobile/screen/login/login_screen.dart';
 import 'package:fof_dfp_mobile/widget/common/login_info.dart';
-import 'package:fof_dfp_mobile/widget/common/not_found.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,25 +19,98 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   var logger = Logger();
+  var locationController = GetXManager.getLocationController();
+
   Future<void> doGetLocation() async {
     Position position = await LocationManager.getCurrentLocation();
+    locationController.setLatitude(position.longitude);
+    locationController.setLatitude(position.latitude);
+    locationController.setDateTime(DateTime.now());
     logger.i('${position.latitude}, ${position.longitude}');
   }
 
   @override
   Widget build(BuildContext context) {
+    String txtButon = 'Start Location';
+
     return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           GetBuilder<LoginController>(
+            init: GetXManager.getLoginController(),
             builder: (controller) {
               return controller.isLogin.value
                   ? LoginInfo(userid: controller.userInfo['custNm'])
-                  : const NotFound();
+                  : const SizedBox.shrink();
             },
           ),
+          GetBuilder<LocationController>(
+            init: GetXManager.getLocationController(),
+            builder: (controller) {
+              return controller.latitude.value > 0.0
+                  ? Column(
+                      children: [
+                        Text(
+                          'position = ${controller.latitude.value},${controller.latitude.value}',
+                          style: GoogleFonts.notoSans(
+                            color: Colors.black,
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        Text(
+                          'date = ${controller.dateString}',
+                          style: GoogleFonts.notoSans(
+                            color: Colors.black,
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    )
+                  : const SizedBox.shrink();
+            },
+          ),
+          // StreamBuilder<Map<String, dynamic>?>(
+          //   stream: FlutterBackgroundService().on('update'),
+          //   builder: (context, snapshot) {
+          //     if (!snapshot.hasData) {
+          //       return const SizedBox.shrink();
+          //     }
+
+          //     final data = snapshot.data!;
+
+          //     double? longitude = data["longitude"];
+          //     double? latitude = data["latitude"];
+          //     DateTime? date = DateTime.tryParse(data["current_date"]);
+          //     return Column(
+          //       children: [
+          //         Text(
+          //           'position = $longitude,$latitude',
+          //           style: GoogleFonts.notoSans(
+          //             color: Colors.black,
+          //             fontSize: 17,
+          //             fontWeight: FontWeight.bold,
+          //           ),
+          //           textAlign: TextAlign.center,
+          //         ),
+          //         Text(
+          //           'date = ${date.toString()}',
+          //           style: GoogleFonts.notoSans(
+          //             color: Colors.black,
+          //             fontSize: 17,
+          //             fontWeight: FontWeight.bold,
+          //           ),
+          //           textAlign: TextAlign.center,
+          //         ),
+          //       ],
+          //     );
+          //   },
+          // ),
           Padding(
             padding: const EdgeInsets.only(left: 22, right: 22),
             child: Container(
@@ -58,7 +128,7 @@ class _MainScreenState extends State<MainScreen> {
                   // ScreenHandler.openScreen(context, LoginScreen.screenName);
                 },
                 child: Text(
-                  'Start Location',
+                  txtButon,
                   style: GoogleFonts.notoSans(
                     color: Colors.white,
                     fontSize: 17,

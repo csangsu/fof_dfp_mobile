@@ -1,24 +1,53 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:fof_dfp_mobile/common/background_service.dart';
 
 import 'package:fof_dfp_mobile/common/constants.dart';
+import 'package:fof_dfp_mobile/common/gex_controller/getx_manager.dart';
+import 'package:fof_dfp_mobile/common/location_manager.dart';
 import 'package:fof_dfp_mobile/fof_dfp_mobile.dart';
 import 'package:fof_dfp_mobile/service/system/login_service.dart';
 import 'package:get/get.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
 import 'package:fof_dfp_mobile/common/environment.dart';
+import 'package:logger/logger.dart';
 
 void main() async {
   await dotenv.load(fileName: Environment.envFileName);
 
   WidgetsFlutterBinding.ensureInitialized();
+  await LocationManager.getCurrentLocation();
+  await BackgroundService.initializeService();
   await LoginRequestHandler.doAutoLogin();
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
+  GetXManager.getLocationController();
+  GetXManager.getLoginController();
+  initBackgroundService();
   runApp(const AppMain());
+}
+
+void initBackgroundService() {
+  final backgroundService = FlutterBackgroundService();
+  var logger = Logger();
+  backgroundService.on('update').listen((event) {
+    if (event == null) return;
+    final locationController = GetXManager.getLocationController();
+    double longitude = event['longitude'];
+    double latitude = event['latitude'];
+    DateTime? date = DateTime.tryParse(event['current_date']);
+    locationController.setLatitude(latitude);
+    locationController.setLongitude(longitude);
+    locationController.setDateTime(date!);
+  }, onError: (e, s) {
+    logger.i('error listening for updates: $e, $s');
+  }, onDone: () {
+    logger.i('background listen closed');
+  });
 }
 
 class AppMain extends StatelessWidget {

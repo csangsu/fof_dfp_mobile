@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:fof_dfp_mobile/common/constants.dart';
+import 'package:fof_dfp_mobile/common/gex_controller/getx_manager.dart';
 import 'package:fof_dfp_mobile/screen/login/login_screen.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
 
 import 'package:fof_dfp_mobile/common/dialog/common_dialog.dart';
-import 'package:fof_dfp_mobile/common/gex_controller/login_controller.dart';
 
 class MainDrawer extends StatefulWidget {
   const MainDrawer({required this.onChangeScreen, super.key});
@@ -19,7 +18,7 @@ class MainDrawer extends StatefulWidget {
 
 class _MainDrawerState extends State<MainDrawer> {
   bool isExpanded = false;
-  var loginController = Get.find<LoginController>();
+  var loginController = GetXManager.getLoginController();
   var logger = Logger();
 
   Future<void> changeLoginScreen(bool isMessage) async {

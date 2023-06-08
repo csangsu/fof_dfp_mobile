@@ -3,11 +3,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fof_dfp_mobile/common/common_screen.dart';
 
 import 'package:fof_dfp_mobile/common/constants.dart';
-import 'package:fof_dfp_mobile/common/gex_controller/login_controller.dart';
+import 'package:fof_dfp_mobile/common/gex_controller/getx_manager.dart';
 import 'package:fof_dfp_mobile/common/request/request_handler.dart';
 import 'package:fof_dfp_mobile/common/shared_preferences.dart';
 import 'package:fof_dfp_mobile/widget/button/textbutton_large.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
 
@@ -25,7 +24,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   var logger = Logger();
-  var loginController = Get.find<LoginController>();
+  var loginController = GetXManager.getLoginController();
   String _selectedItem = '+82';
   bool isAutoLogin = false;
   bool isRememberId = false;
