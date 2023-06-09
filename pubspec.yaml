@@ -51,6 +51,8 @@ dependencies:
   flutter_background_service_android: ^3.0.3
   intl: ^0.18.1
   just_audio: ^0.9.34
+  camera: ^0.10.5+2
+  image_picker: ^0.8.7+5
 
 dev_dependencies:
   flutter_test:

@@ -2,10 +2,12 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:fof_dfp_mobile/common/audio_palyer.dart';
+import 'package:fof_dfp_mobile/common/common_screen.dart';
 import 'package:fof_dfp_mobile/common/gex_controller/getx_manager.dart';
 import 'package:fof_dfp_mobile/common/gex_controller/location_controller.dart';
 import 'package:fof_dfp_mobile/common/gex_controller/login_controller.dart';
 import 'package:fof_dfp_mobile/common/location_manager.dart';
+import 'package:fof_dfp_mobile/screen/camera_screen.dart';
 import 'package:fof_dfp_mobile/widget/common/login_info.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -98,6 +100,7 @@ class _MainScreenState extends State<MainScreen> {
                 onPressed: () async {
                   AssertsPalyer.playAssert(
                       audioFileName: 'assets/audio/beep.mp3');
+                  ScreenHandler.openScreen(context, CameraScreen.screenName);
                 },
                 child: Text(
                   txtButon,

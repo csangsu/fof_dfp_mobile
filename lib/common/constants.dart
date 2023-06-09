@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fof_dfp_mobile/common/environment.dart';
+import 'package:fof_dfp_mobile/screen/camera_screen.dart';
 import 'package:fof_dfp_mobile/screen/login/login_screen.dart';
 import 'package:fof_dfp_mobile/screen/main_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -42,4 +43,5 @@ ThemeData kAppTheme = ThemeData(
 Map<String, dynamic> kScreenMap = {
   LoginScreen.screenName: const LoginScreen(),
   MainScreen.screenName: const MainScreen(),
+  CameraScreen.screenName: const CameraScreen(),
 };
