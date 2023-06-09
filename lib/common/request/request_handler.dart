@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:fof_dfp_mobile/common/constants.dart';
 import 'package:fof_dfp_mobile/models/comon/response_result.dart';
@@ -65,6 +67,38 @@ class DioRequestHandler {
     );
     Response response =
         await dio.get(urlAddress, data: requestData, options: options);
+
+    if (response.statusCode != 200) {
+      ExceptionHandler.showCustomDialog(
+          title: '에러',
+          message: '에러가 발생하였습니다. HTTP Code[${response.statusCode}]',
+          btnCaption: '확인');
+    }
+
+    logger.i(response.data);
+    return ResponseResult.fromMap(response.data);
+  }
+
+  Future<ResponseResult> upload(
+      String urlAddress, List<File> files, Map<String, dynamic> param) async {
+    final logger = Logger();
+    var dio = DioSingleton().dio;
+
+    final formData = FormData();
+    for (int i = 0; i < files.length; i++) {
+      final file = files[i];
+      formData.files.add(
+        MapEntry('file$i', await MultipartFile.fromFile(file.path)),
+      );
+    }
+    for (String key in param.keys) {
+      formData.fields.add(MapEntry(key, param[key]));
+    }
+
+    final response = await dio.post(
+      urlAddress,
+      data: formData,
+    );
 
     if (response.statusCode != 200) {
       ExceptionHandler.showCustomDialog(
