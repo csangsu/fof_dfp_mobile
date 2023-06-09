@@ -53,6 +53,7 @@ dependencies:
   just_audio: ^0.9.34
   camera: ^0.10.5+2
   image_picker: ^0.8.7+5
+  uuid: ^3.0.7
 
 dev_dependencies:
   flutter_test:

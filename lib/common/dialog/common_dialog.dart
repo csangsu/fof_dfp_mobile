@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../constants.dart';
+import 'package:fof_dfp_mobile/common/constants.dart';
 
 class ExceptionHandler {
   static Future<void> showCustomDialog({

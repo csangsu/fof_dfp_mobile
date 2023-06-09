@@ -1,15 +1,14 @@
+import 'package:logger/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fof_dfp_mobile/common/common_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
 
+import 'package:fof_dfp_mobile/common/common_screen.dart';
 import 'package:fof_dfp_mobile/common/constants.dart';
 import 'package:fof_dfp_mobile/common/request/request_handler.dart';
 import 'package:fof_dfp_mobile/common/shared_preferences.dart';
 import 'package:fof_dfp_mobile/providers/getx_manager.dart';
 import 'package:fof_dfp_mobile/widget/button/textbutton_large.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:logger/logger.dart';
-
 import 'package:fof_dfp_mobile/common/dialog/common_dialog.dart';
 import 'package:fof_dfp_mobile/service/system/login_service.dart';
 

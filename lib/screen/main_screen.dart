@@ -9,8 +9,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
 
 import 'package:fof_dfp_mobile/common/audio_palyer.dart';
-import 'package:fof_dfp_mobile/providers/location_controller.dart';
-import 'package:fof_dfp_mobile/providers/login_controller.dart';
 import 'package:fof_dfp_mobile/common/location_manager.dart';
 import 'package:fof_dfp_mobile/providers/getx_manager.dart';
 import 'package:fof_dfp_mobile/widget/common/login_info.dart';
@@ -54,7 +52,7 @@ class _MainScreenState extends State<MainScreen> {
           ImageInput(
             onPickImage: onPickImage,
           ),
-          GetBuilder<LoginController>(
+          GetBuilder(
             init: GetXManager.getLoginController(),
             builder: (controller) {
               return controller.isLogin.value
@@ -79,7 +77,7 @@ class _MainScreenState extends State<MainScreen> {
                     );
             },
           ),
-          GetBuilder<LocationController>(
+          GetBuilder(
             init: GetXManager.getLocationController(),
             builder: (controller) {
               return Column(

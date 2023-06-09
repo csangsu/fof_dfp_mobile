@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:logger/logger.dart';
-import 'package:camera/camera.dart';
 
 import 'package:fof_dfp_mobile/common/background_service.dart';
 import 'package:fof_dfp_mobile/common/constants.dart';
@@ -17,7 +16,6 @@ import 'package:fof_dfp_mobile/service/system/login_service.dart';
 import 'package:fof_dfp_mobile/common/environment.dart';
 
 AudioPlayer? player;
-late List<CameraDescription> cameras;
 
 void main() async {
   await dotenv.load(fileName: Environment.envFileName);
@@ -29,7 +27,6 @@ void main() async {
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
-  cameras = await availableCameras();
   GetXManager.getLocationController();
   GetXManager.getLoginController();
   initBackgroundService();
