@@ -1,6 +1,8 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:fof_dfp_mobile/common/utils.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart' as syspaths;
 import 'package:path/path.dart' as path;
@@ -26,13 +28,10 @@ class _ImageInputState extends State<ImageInput> {
     if (pickedImage == null) {
       return;
     }
-    final image = File(pickedImage.path);
-    final appDir = await syspaths.getApplicationDocumentsDirectory();
-    final filename = path.basename(image.path);
-    final copiedImage = await image.copy('${appDir.path}/$filename');
 
+    String pathImage = await Utils.moveCameraImageToDocRoot(pickedImage);
     setState(() {
-      _selectedImage = File(copiedImage.path);
+      _selectedImage = File(pathImage);
     });
 
     widget.onPickImage(_selectedImage!);
