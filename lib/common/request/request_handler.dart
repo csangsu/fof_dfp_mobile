@@ -1,12 +1,13 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:loader_overlay/loader_overlay.dart';
+import 'package:path_provider/path_provider.dart' as syspaths;
+import 'package:logger/logger.dart';
+
 import 'package:fof_dfp_mobile/common/constants.dart';
 import 'package:fof_dfp_mobile/models/comon/response_result.dart';
 import 'package:fof_dfp_mobile/widget/circular_overlay.dart';
-import 'package:loader_overlay/loader_overlay.dart';
-import 'package:logger/logger.dart';
-
 import '../dialog/common_dialog.dart';
 import 'dio_singleton.dart';
 
@@ -79,7 +80,7 @@ class DioRequestHandler {
     return ResponseResult.fromMap(response.data);
   }
 
-  Future<ResponseResult> upload(
+  static Future<ResponseResult> upload(
       String urlAddress, List<File> files, Map<String, dynamic> param) async {
     final logger = Logger();
     var dio = DioSingleton().dio;
@@ -109,5 +110,18 @@ class DioRequestHandler {
 
     logger.i(response.data);
     return ResponseResult.fromMap(response.data);
+  }
+
+  Future<void> downloadFileToDownloadFolder(String url) async {
+    var logger = Logger();
+    final dio = Dio();
+    final downloadFolder = await syspaths.getDownloadsDirectory();
+    String savePath = downloadFolder!.path;
+    try {
+      final response = await dio.download(url, savePath);
+      logger.i('Download response: $response');
+    } catch (e) {
+      throw Exception('Failed to download file: $e');
+    }
   }
 }

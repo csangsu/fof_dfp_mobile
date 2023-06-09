@@ -1,11 +1,8 @@
 import 'dart:io';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:fof_dfp_mobile/common/utils.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:path_provider/path_provider.dart' as syspaths;
-import 'package:path/path.dart' as path;
 
 class ImageInput extends StatefulWidget {
   const ImageInput({super.key, required this.onPickImage});
