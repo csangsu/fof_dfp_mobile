@@ -1,18 +1,19 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:fof_dfp_mobile/common/audio_palyer.dart';
-import 'package:fof_dfp_mobile/common/common_screen.dart';
-import 'package:fof_dfp_mobile/providers/location_controller.dart';
-import 'package:fof_dfp_mobile/providers/login_controller.dart';
-import 'package:fof_dfp_mobile/common/location_manager.dart';
-import 'package:fof_dfp_mobile/providers/getx_manager.dart';
-import 'package:fof_dfp_mobile/screen/camera_screen.dart';
-import 'package:fof_dfp_mobile/widget/common/login_info.dart';
+import 'package:fof_dfp_mobile/widget/image_input.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
+
+import 'package:fof_dfp_mobile/common/audio_palyer.dart';
+import 'package:fof_dfp_mobile/providers/location_controller.dart';
+import 'package:fof_dfp_mobile/providers/login_controller.dart';
+import 'package:fof_dfp_mobile/common/location_manager.dart';
+import 'package:fof_dfp_mobile/providers/getx_manager.dart';
+import 'package:fof_dfp_mobile/widget/common/login_info.dart';
 
 class MainScreen extends StatefulWidget {
   static String screenName = "MainScreen";
@@ -31,6 +32,8 @@ class _MainScreenState extends State<MainScreen> {
     super.dispose();
   }
 
+  void onPickImage(File image) {}
+
   Future<void> doGetLocation() async {
     Position position = await LocationManager.getCurrentLocation();
     locationController.setLatitude(position.longitude);
@@ -48,41 +51,59 @@ class _MainScreenState extends State<MainScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          ImageInput(
+            onPickImage: onPickImage,
+          ),
           GetBuilder<LoginController>(
             init: GetXManager.getLoginController(),
             builder: (controller) {
               return controller.isLogin.value
                   ? LoginInfo(userid: controller.userInfo['custNm'])
-                  : const SizedBox.shrink();
+                  : Column(
+                      children: [
+                        const SizedBox(
+                          height: 50,
+                        ),
+                        Text(
+                          'Not Login',
+                          style: GoogleFonts.notoSans(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blue,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 50,
+                        ),
+                      ],
+                    );
             },
           ),
           GetBuilder<LocationController>(
             init: GetXManager.getLocationController(),
             builder: (controller) {
-              return controller.latitude.value > 0.0
-                  ? Column(
-                      children: [
-                        Text(
-                          'position = ${controller.latitude.value},${controller.latitude.value}',
-                          style: GoogleFonts.notoSans(
-                            color: Colors.black,
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        Text(
-                          'date = ${controller.dateString}',
-                          style: GoogleFonts.notoSans(
-                            color: Colors.black,
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    )
-                  : const SizedBox.shrink();
+              return Column(
+                children: [
+                  Text(
+                    'position = ${controller.latitude.value},${controller.longitude.value}',
+                    style: GoogleFonts.notoSans(
+                      color: Colors.black,
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  Text(
+                    'date = ${controller.dateString}',
+                    style: GoogleFonts.notoSans(
+                      color: Colors.black,
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              );
             },
           ),
           Padding(
@@ -100,7 +121,6 @@ class _MainScreenState extends State<MainScreen> {
                 onPressed: () async {
                   AssertsPalyer.playAssert(
                       audioFileName: 'assets/audio/beep.mp3');
-                  ScreenHandler.openScreen(context, CameraScreen.screenName);
                 },
                 child: Text(
                   txtButon,

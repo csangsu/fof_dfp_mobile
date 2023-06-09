@@ -35,298 +35,40 @@ class _MainDrawerState extends State<MainDrawer> {
 
   @override
   Widget build(BuildContext context) {
-    return Drawer(
-      width: double.infinity,
-      child: Column(
-        children: [
-          const SizedBox(
-            height: 20,
-          ),
-          Container(
-            // margin: const EdgeInsets.only(top: 60),
-            height: 40, // 픽셀 단위로 높이 설정
-            color: Colors.white,
-            child: Row(
-              children: [
-                TextButton(
-                  onPressed: () {
-                    changeLoginScreen(false);
-                    return;
-                  },
-                  child: Text(
-                    '로그인',
-                    style: GoogleFonts.notoSans(
-                      color: const Color.fromARGB(255, 0, 0, 0),
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                const SizedBox(
-                  width: 16,
-                ), // Add spacing between the buttons
-                TextButton(
-                  onPressed: () async {
-                    if (!loginController.isLogin.value) {
-                      await changeLoginScreen(true);
-                      return;
-                    }
-                    await ExceptionHandler.showCustomDialog(
-                      title: '정보',
-                      message: '개발 중입니다.',
-                      btnCaption: '확인',
-                    );
-                  },
-                  child: Text(
-                    '회원관리',
-                    style: GoogleFonts.notoSans(
-                      color: const Color.fromARGB(255, 0, 0, 0),
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                const Spacer(), // Expands to fill the remaining space
-                IconButton(
-                  icon: const Icon(Icons.close),
-                  onPressed: () {
-                    logger.i('icon button proessed');
-                    kScaffoldKey.currentState?.openDrawer();
-                  },
-                ),
-              ],
+    return SafeArea(
+      child: Drawer(
+        width: double.infinity,
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 20,
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 40, right: 40, top: 10),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Container(
-                    height: 40,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: const Color.fromARGB(255, 26, 183, 183),
-                      ),
-                      color: const Color.fromARGB(255, 26, 183, 183),
-                    ),
-                    child: TextButton(
-                      onPressed: () async {
-                        if (!loginController.isLogin.value) {
-                          await changeLoginScreen(true);
-                          return;
-                        }
-                        await ExceptionHandler.showCustomDialog(
-                          title: '정보',
-                          message: '개발 중입니다.',
-                          btnCaption: '확인',
-                        );
-                      },
-                      child: Text(
-                        '회원관리',
-                        style: GoogleFonts.notoSans(
-                          color: Colors.white,
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    height: 40,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: const Color.fromARGB(255, 26, 183, 183),
-                      ),
-                      color: Colors.white,
-                    ),
-                    child: TextButton(
-                      onPressed: () async {
-                        if (!loginController.isLogin.value) {
-                          await changeLoginScreen(true);
-                          return;
-                        }
-                        await ExceptionHandler.showCustomDialog(
-                          title: '정보',
-                          message: '개발 중입니다.',
-                          btnCaption: '확인',
-                        );
-                      },
-                      child: Text(
-                        'WORKPLACE',
-                        style: GoogleFonts.lato(
-                          color: const Color.fromARGB(255, 26, 183, 183),
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          ListTile(
-            leading: const Icon(
-              Icons.home,
-              size: 30,
-            ),
-            title: Text(
-              'OVERVIEW',
-              style: GoogleFonts.lato(
-                fontSize: 20,
-                color: Colors.black,
-              ),
-            ),
-            onTap: () async {
-              if (!loginController.isLogin.value) {
-                await changeLoginScreen(true);
-                return;
-              }
-              await ExceptionHandler.showCustomDialog(
-                title: '정보',
-                message: '개발 중입니다.',
-                btnCaption: '확인',
-              );
-            },
-          ),
-          ListTile(
-            leading: const Icon(
-              Icons.grid_view,
-              size: 30,
-            ),
-            title: Text(
-              '서비스',
-              style: GoogleFonts.notoSans(
-                fontSize: 20,
-                color: const Color.fromARGB(255, 26, 183, 183),
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            onTap: () async {
-              setState(() {
-                isExpanded = !isExpanded;
-                logger.i(isExpanded);
-              });
-            },
-          ),
-          if (isExpanded)
-            Padding(
-              padding: const EdgeInsets.only(left: 60),
-              child: Column(
+            Container(
+              // margin: const EdgeInsets.only(top: 60),
+              height: 40, // 픽셀 단위로 높이 설정
+              color: Colors.white,
+              child: Row(
                 children: [
-                  SizedBox(
-                    height: 30,
-                    child: ListTile(
-                      title: Text(
-                        '해상운송',
-                        style: GoogleFonts.notoSans(
-                          fontSize: 14,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      onTap: () async {
-                        if (!loginController.isLogin.value) {
-                          await changeLoginScreen(true);
-                          return;
-                        }
-                        await ExceptionHandler.showCustomDialog(
-                          title: '정보',
-                          message: '개발 중입니다.',
-                          btnCaption: '확인',
-                        );
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    height: 30,
-                    child: ListTile(
-                      title: Text(
-                        '내륙운송',
-                        style: GoogleFonts.notoSans(
-                          fontSize: 14,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      onTap: () async {
-                        if (!loginController.isLogin.value) {
-                          await changeLoginScreen(true);
-                          return;
-                        }
-                        await ExceptionHandler.showCustomDialog(
-                          title: '정보',
-                          message: '개발 중입니다.',
-                          btnCaption: '확인',
-                        );
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    height: 30,
-                    child: ListTile(
-                      title: Text(
-                        '적화보험',
-                        style: GoogleFonts.notoSans(
-                          fontSize: 14,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      onTap: () async {
-                        if (!loginController.isLogin.value) {
-                          await changeLoginScreen(true);
-                          return;
-                        }
-                        await ExceptionHandler.showCustomDialog(
-                          title: '정보',
-                          message: '개발 중입니다.',
-                          btnCaption: '확인',
-                        );
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    height: 30,
-                    child: ListTile(
-                      title: Text(
-                        '통관서비스',
-                        style: GoogleFonts.notoSans(
-                          fontSize: 14,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      onTap: () async {
-                        if (!loginController.isLogin.value) {
-                          await changeLoginScreen(true);
-                          return;
-                        }
-                        await ExceptionHandler.showCustomDialog(
-                          title: '정보',
-                          message: '개발 중입니다.',
-                          btnCaption: '확인',
-                        );
-                      },
-                    ),
-                  ),
-                  ListTile(
-                    title: Text(
-                      'FBA 전용서비스',
+                  TextButton(
+                    onPressed: () {
+                      changeLoginScreen(false);
+                      return;
+                    },
+                    child: Text(
+                      '로그인',
                       style: GoogleFonts.notoSans(
+                        color: const Color.fromARGB(255, 0, 0, 0),
                         fontSize: 14,
-                        color: Colors.black,
                         fontWeight: FontWeight.bold,
                       ),
+                      textAlign: TextAlign.center,
                     ),
-                    onTap: () async {
+                  ),
+                  const SizedBox(
+                    width: 16,
+                  ), // Add spacing between the buttons
+                  TextButton(
+                    onPressed: () async {
                       if (!loginController.isLogin.value) {
                         await changeLoginScreen(true);
                         return;
@@ -337,107 +79,367 @@ class _MainDrawerState extends State<MainDrawer> {
                         btnCaption: '확인',
                       );
                     },
+                    child: Text(
+                      '회원관리',
+                      style: GoogleFonts.notoSans(
+                        color: const Color.fromARGB(255, 0, 0, 0),
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  const Spacer(), // Expands to fill the remaining space
+                  IconButton(
+                    icon: const Icon(Icons.close),
+                    onPressed: () {
+                      logger.i('icon button proessed');
+                      kScaffoldKey.currentState?.openDrawer();
+                    },
                   ),
                 ],
               ),
             ),
-          ListTile(
-            leading: const Icon(
-              Icons.headset,
-              size: 30,
-            ),
-            title: Text(
-              '고객센터',
-              style: GoogleFonts.notoSans(
-                fontSize: 20,
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
+            Padding(
+              padding: const EdgeInsets.only(left: 40, right: 40, top: 10),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      height: 40,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: const Color.fromARGB(255, 26, 183, 183),
+                        ),
+                        color: const Color.fromARGB(255, 26, 183, 183),
+                      ),
+                      child: TextButton(
+                        onPressed: () async {
+                          if (!loginController.isLogin.value) {
+                            await changeLoginScreen(true);
+                            return;
+                          }
+                          await ExceptionHandler.showCustomDialog(
+                            title: '정보',
+                            message: '개발 중입니다.',
+                            btnCaption: '확인',
+                          );
+                        },
+                        child: Text(
+                          '회원관리',
+                          style: GoogleFonts.notoSans(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      height: 40,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: const Color.fromARGB(255, 26, 183, 183),
+                        ),
+                        color: Colors.white,
+                      ),
+                      child: TextButton(
+                        onPressed: () async {
+                          if (!loginController.isLogin.value) {
+                            await changeLoginScreen(true);
+                            return;
+                          }
+                          await ExceptionHandler.showCustomDialog(
+                            title: '정보',
+                            message: '개발 중입니다.',
+                            btnCaption: '확인',
+                          );
+                        },
+                        child: Text(
+                          'WORKPLACE',
+                          style: GoogleFonts.lato(
+                            color: const Color.fromARGB(255, 26, 183, 183),
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-            onTap: () async {
-              if (!loginController.isLogin.value) {
-                await changeLoginScreen(true);
-                return;
-              }
-              await ExceptionHandler.showCustomDialog(
-                title: '정보',
-                message: '개발 중입니다.',
-                btnCaption: '확인',
-              );
-            },
-          ),
-          ListTile(
-            leading: const Icon(
-              Icons.aspect_ratio,
-              size: 30,
-            ),
-            title: Text(
-              '인사이트',
-              style: GoogleFonts.notoSans(
-                fontSize: 20,
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
+            ListTile(
+              leading: const Icon(
+                Icons.home,
+                size: 30,
               ),
-            ),
-            onTap: () async {
-              if (!loginController.isLogin.value) {
-                await changeLoginScreen(true);
-                return;
-              }
-              await ExceptionHandler.showCustomDialog(
-                title: '정보',
-                message: '개발 중입니다.',
-                btnCaption: '확인',
-              );
-            },
-          ),
-          ListTile(
-            leading: const Icon(
-              Icons.business,
-              size: 30,
-            ),
-            title: Text(
-              '회사소개',
-              style: GoogleFonts.notoSans(
-                fontSize: 20,
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
+              title: Text(
+                'OVERVIEW',
+                style: GoogleFonts.lato(
+                  fontSize: 20,
+                  color: Colors.black,
+                ),
               ),
+              onTap: () async {
+                if (!loginController.isLogin.value) {
+                  await changeLoginScreen(true);
+                  return;
+                }
+                await ExceptionHandler.showCustomDialog(
+                  title: '정보',
+                  message: '개발 중입니다.',
+                  btnCaption: '확인',
+                );
+              },
             ),
-            onTap: () async {
-              await ExceptionHandler.showCustomDialog(
-                title: '정보',
-                message: '개발 중입니다.',
-                btnCaption: '확인',
-              );
-            },
-          ),
-          ListTile(
-            leading: const Icon(
-              Icons.people,
-              size: 30,
-            ),
-            title: Text(
-              'MEMBER',
-              style: GoogleFonts.notoSans(
-                fontSize: 20,
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
+            ListTile(
+              leading: const Icon(
+                Icons.grid_view,
+                size: 30,
               ),
+              title: Text(
+                '서비스',
+                style: GoogleFonts.notoSans(
+                  fontSize: 20,
+                  color: const Color.fromARGB(255, 26, 183, 183),
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              onTap: () async {
+                setState(() {
+                  isExpanded = !isExpanded;
+                  logger.i(isExpanded);
+                });
+              },
             ),
-            onTap: () async {
-              if (!loginController.isLogin.value) {
-                await changeLoginScreen(true);
-                return;
-              }
-              await ExceptionHandler.showCustomDialog(
-                title: '정보',
-                message: '개발 중입니다.',
-                btnCaption: '확인',
-              );
-            },
-          ),
-        ],
+            if (isExpanded)
+              Padding(
+                padding: const EdgeInsets.only(left: 60),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 30,
+                      child: ListTile(
+                        title: Text(
+                          '해상운송',
+                          style: GoogleFonts.notoSans(
+                            fontSize: 14,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        onTap: () async {
+                          if (!loginController.isLogin.value) {
+                            await changeLoginScreen(true);
+                            return;
+                          }
+                          await ExceptionHandler.showCustomDialog(
+                            title: '정보',
+                            message: '개발 중입니다.',
+                            btnCaption: '확인',
+                          );
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30,
+                      child: ListTile(
+                        title: Text(
+                          '내륙운송',
+                          style: GoogleFonts.notoSans(
+                            fontSize: 14,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        onTap: () async {
+                          if (!loginController.isLogin.value) {
+                            await changeLoginScreen(true);
+                            return;
+                          }
+                          await ExceptionHandler.showCustomDialog(
+                            title: '정보',
+                            message: '개발 중입니다.',
+                            btnCaption: '확인',
+                          );
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30,
+                      child: ListTile(
+                        title: Text(
+                          '적화보험',
+                          style: GoogleFonts.notoSans(
+                            fontSize: 14,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        onTap: () async {
+                          if (!loginController.isLogin.value) {
+                            await changeLoginScreen(true);
+                            return;
+                          }
+                          await ExceptionHandler.showCustomDialog(
+                            title: '정보',
+                            message: '개발 중입니다.',
+                            btnCaption: '확인',
+                          );
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30,
+                      child: ListTile(
+                        title: Text(
+                          '통관서비스',
+                          style: GoogleFonts.notoSans(
+                            fontSize: 14,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        onTap: () async {
+                          if (!loginController.isLogin.value) {
+                            await changeLoginScreen(true);
+                            return;
+                          }
+                          await ExceptionHandler.showCustomDialog(
+                            title: '정보',
+                            message: '개발 중입니다.',
+                            btnCaption: '확인',
+                          );
+                        },
+                      ),
+                    ),
+                    ListTile(
+                      title: Text(
+                        'FBA 전용서비스',
+                        style: GoogleFonts.notoSans(
+                          fontSize: 14,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      onTap: () async {
+                        if (!loginController.isLogin.value) {
+                          await changeLoginScreen(true);
+                          return;
+                        }
+                        await ExceptionHandler.showCustomDialog(
+                          title: '정보',
+                          message: '개발 중입니다.',
+                          btnCaption: '확인',
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ListTile(
+              leading: const Icon(
+                Icons.headset,
+                size: 30,
+              ),
+              title: Text(
+                '고객센터',
+                style: GoogleFonts.notoSans(
+                  fontSize: 20,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              onTap: () async {
+                if (!loginController.isLogin.value) {
+                  await changeLoginScreen(true);
+                  return;
+                }
+                await ExceptionHandler.showCustomDialog(
+                  title: '정보',
+                  message: '개발 중입니다.',
+                  btnCaption: '확인',
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(
+                Icons.aspect_ratio,
+                size: 30,
+              ),
+              title: Text(
+                '인사이트',
+                style: GoogleFonts.notoSans(
+                  fontSize: 20,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              onTap: () async {
+                if (!loginController.isLogin.value) {
+                  await changeLoginScreen(true);
+                  return;
+                }
+                await ExceptionHandler.showCustomDialog(
+                  title: '정보',
+                  message: '개발 중입니다.',
+                  btnCaption: '확인',
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(
+                Icons.business,
+                size: 30,
+              ),
+              title: Text(
+                '회사소개',
+                style: GoogleFonts.notoSans(
+                  fontSize: 20,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              onTap: () async {
+                await ExceptionHandler.showCustomDialog(
+                  title: '정보',
+                  message: '개발 중입니다.',
+                  btnCaption: '확인',
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(
+                Icons.people,
+                size: 30,
+              ),
+              title: Text(
+                'MEMBER',
+                style: GoogleFonts.notoSans(
+                  fontSize: 20,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              onTap: () async {
+                if (!loginController.isLogin.value) {
+                  await changeLoginScreen(true);
+                  return;
+                }
+                await ExceptionHandler.showCustomDialog(
+                  title: '정보',
+                  message: '개발 중입니다.',
+                  btnCaption: '확인',
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
