@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
-import 'package:fof_dfp_mobile/common/gex_controller/login_controller.dart';
-import 'package:fof_dfp_mobile/common/gex_controller/location_controller.dart';
+import 'package:fof_dfp_mobile/providers/login_controller.dart';
+import 'package:fof_dfp_mobile/providers/location_controller.dart';
 
 class GetXManager {
   static LoginController getLoginController() {

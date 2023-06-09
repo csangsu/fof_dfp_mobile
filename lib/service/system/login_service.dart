@@ -1,7 +1,7 @@
 import 'package:fof_dfp_mobile/common/constants.dart';
-import 'package:fof_dfp_mobile/common/gex_controller/getx_manager.dart';
 import 'package:fof_dfp_mobile/common/request/request_handler.dart';
 import 'package:fof_dfp_mobile/common/shared_preferences.dart';
+import 'package:fof_dfp_mobile/providers/getx_manager.dart';
 import 'package:logger/logger.dart';
 
 class LoginRequestHandler {

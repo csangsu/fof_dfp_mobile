@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:fof_dfp_mobile/common/constants.dart';
-import 'package:fof_dfp_mobile/common/gex_controller/getx_manager.dart';
-import 'package:fof_dfp_mobile/screen/login/login_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
 
+import 'package:fof_dfp_mobile/common/constants.dart';
+import 'package:fof_dfp_mobile/providers/getx_manager.dart';
+import 'package:fof_dfp_mobile/screen/login/login_screen.dart';
 import 'package:fof_dfp_mobile/common/dialog/common_dialog.dart';
 
 class MainDrawer extends StatefulWidget {

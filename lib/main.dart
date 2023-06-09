@@ -2,20 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:fof_dfp_mobile/common/background_service.dart';
-
-import 'package:fof_dfp_mobile/common/constants.dart';
-import 'package:fof_dfp_mobile/common/gex_controller/getx_manager.dart';
-import 'package:fof_dfp_mobile/common/location_manager.dart';
-import 'package:fof_dfp_mobile/fof_dfp_mobile.dart';
-import 'package:fof_dfp_mobile/service/system/login_service.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-
-import 'package:fof_dfp_mobile/common/environment.dart';
 import 'package:logger/logger.dart';
 import 'package:camera/camera.dart';
+
+import 'package:fof_dfp_mobile/common/background_service.dart';
+import 'package:fof_dfp_mobile/common/constants.dart';
+import 'package:fof_dfp_mobile/common/location_manager.dart';
+import 'package:fof_dfp_mobile/fof_dfp_mobile.dart';
+import 'package:fof_dfp_mobile/providers/getx_manager.dart';
+import 'package:fof_dfp_mobile/service/system/login_service.dart';
+import 'package:fof_dfp_mobile/common/environment.dart';
 
 AudioPlayer? player;
 late List<CameraDescription> cameras;
