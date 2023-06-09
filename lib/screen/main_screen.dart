@@ -1,15 +1,12 @@
-import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:fof_dfp_mobile/widget/image_input.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
 
 import 'package:fof_dfp_mobile/common/audio_palyer.dart';
-import 'package:fof_dfp_mobile/common/location_manager.dart';
 import 'package:fof_dfp_mobile/providers/getx_manager.dart';
 import 'package:fof_dfp_mobile/widget/common/login_info.dart';
 
@@ -31,14 +28,6 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   void onPickImage(File image) {}
-
-  Future<void> doGetLocation() async {
-    Position position = await LocationManager.getCurrentLocation();
-    locationController.setLatitude(position.longitude);
-    locationController.setLatitude(position.latitude);
-    locationController.setDateTime(DateTime.now());
-    logger.i('${position.latitude}, ${position.longitude}');
-  }
 
   @override
   Widget build(BuildContext context) {
