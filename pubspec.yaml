@@ -83,6 +83,7 @@ flutter:
   assets:
     - .env.development
     - .env.production
+    - assets/sql/ddl.sql
     - assets/audio/
     - assets/audio/beep.mp3
     - assets/images/quiz-logo.png
