@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:logger/logger.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import 'package:fof_dfp_mobile/common/background_service.dart';
 import 'package:fof_dfp_mobile/common/constants.dart';
@@ -14,6 +15,7 @@ import 'package:fof_dfp_mobile/fof_dfp_mobile.dart';
 import 'package:fof_dfp_mobile/providers/getx_manager.dart';
 import 'package:fof_dfp_mobile/service/system/login_service.dart';
 import 'package:fof_dfp_mobile/common/environment.dart';
+import 'package:fof_dfp_mobile/firebase_options.dart';
 
 AudioPlayer? player;
 
@@ -21,6 +23,9 @@ void main() async {
   await dotenv.load(fileName: Environment.envFileName);
 
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await LocationManager.getCurrentLocation();
   await BackgroundService.initializeService();
   await LoginRequestHandler.doAutoLogin();

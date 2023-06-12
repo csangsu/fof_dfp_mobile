@@ -35,29 +35,23 @@ class DbManager {
   static Future<int> insert(
       String tableName, Map<String, dynamic> param) async {
     final db = await _getDatabase();
-    return await db.transaction(
-      (txn) => txn.insert(tableName, param,
-          conflictAlgorithm: ConflictAlgorithm.fail),
-    );
+    return await db.insert(tableName, param,
+        conflictAlgorithm: ConflictAlgorithm.fail);
   }
 
   static Future<int> update(String tableName, Map<String, dynamic> param,
       {String? where, List<Object>? whereArgs}) async {
     final db = await _getDatabase();
-    return await db.transaction(
-      (txn) => txn.update(tableName, param,
-          where: where,
-          whereArgs: whereArgs,
-          conflictAlgorithm: ConflictAlgorithm.fail),
-    );
+    return await db.update(tableName, param,
+        where: where,
+        whereArgs: whereArgs,
+        conflictAlgorithm: ConflictAlgorithm.fail);
   }
 
   static Future<int> delete(String tableName,
       {String? where, List<Object>? whereArgs}) async {
     final db = await _getDatabase();
-    return await db.transaction(
-      (txn) => txn.delete(tableName, where: where, whereArgs: whereArgs),
-    );
+    return await db.delete(tableName, where: where, whereArgs: whereArgs);
   }
 
   static Future<List<Map<String, Object?>>> select(String tableName,

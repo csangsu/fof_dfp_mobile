@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "121753668140",
+    "project_id": "fof-dfp-mobile",
+    "storage_bucket": "fof-dfp-mobile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:121753668140:android:3b3e732eb8ed6e9adb9f89",
+        "android_client_info": {
+          "package_name": "com.example.fof_dfp_mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "121753668140-d6eidivutsut4ck8nral6tprm3p86065.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPXVuypwIuQ4cAFLZ09bHGQMTrAXvhp9c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "121753668140-d6eidivutsut4ck8nral6tprm3p86065.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "121753668140-8fvumkb4ijo1iaei90f95effrs78gllt.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.fofDfpMobile.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
