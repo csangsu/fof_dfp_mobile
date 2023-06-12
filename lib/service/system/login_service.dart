@@ -17,6 +17,14 @@ class LoginRequestHandler {
     }
   }
 
+  static Future<void> logOut() async {
+    var loginController = GetXManager.getLoginController();
+    loginController.setIsLogin(false);
+    loginController.setUserId('');
+    loginController.setPassword('');
+    loginController.setUserInfoData({});
+  }
+
   static Future<bool> login(
       {required String userId,
       required String pwd,

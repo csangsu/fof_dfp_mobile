@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fof_dfp_mobile/service/system/login_service.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
 
@@ -49,20 +51,28 @@ class _MainDrawerState extends State<MainDrawer> {
               color: Colors.white,
               child: Row(
                 children: [
-                  TextButton(
-                    onPressed: () {
-                      changeLoginScreen(false);
-                      return;
+                  GetBuilder(
+                    init: GetXManager.getLoginController(),
+                    builder: (controller) {
+                      return TextButton(
+                        onPressed: () {
+                          if (!controller.isLogin.value) {
+                            changeLoginScreen(false);
+                          }
+                          LoginRequestHandler.logOut();
+                          return;
+                        },
+                        child: Text(
+                          !controller.isLogin.value ? '로그인' : '로그아웃',
+                          style: GoogleFonts.notoSans(
+                            color: const Color.fromARGB(255, 0, 0, 0),
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      );
                     },
-                    child: Text(
-                      '로그인',
-                      style: GoogleFonts.notoSans(
-                        color: const Color.fromARGB(255, 0, 0, 0),
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
                   ),
                   const SizedBox(
                     width: 16,
