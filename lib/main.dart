@@ -1,7 +1,10 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -26,14 +29,14 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  await LocationManager.getCurrentLocation();
+  await initFirebaseMessage();
+  await initLocationControllerAndGetCurrentLocation();
   await BackgroundService.initializeService();
   await LoginRequestHandler.doAutoLogin();
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
-  GetXManager.getLocationController();
-  GetXManager.getLoginController();
+
   initBackgroundService();
 
   player = AudioPlayer();
@@ -41,18 +44,45 @@ void main() async {
   runApp(const AppMain());
 }
 
+Future<void> initLocationControllerAndGetCurrentLocation() async {
+  var logger = Logger();
+  Position pos = await LocationManager.getCurrentLocation();
+  logger.i('Current Location is : ${pos.latitude}, ${pos.longitude}');
+  final loc = GetXManager.getLocationController();
+  loc.setLatitude(pos.latitude);
+  loc.setLongitude(pos.longitude);
+  loc.setDateTime(DateTime.now());
+}
+
+Future<void> initFirebaseMessage() async {
+  var logger = Logger();
+  final fcm = FirebaseMessaging.instance;
+
+  await fcm.requestPermission();
+
+  await fcm.subscribeToTopic('fof_dfp_mobile');
+  if (kDebugMode) {
+    String? token = await fcm.getToken();
+    if (token != null) {
+      logger.i("Push Token is [$token]");
+    }
+  }
+  fcm.onTokenRefresh.listen((String newToken) {
+    logger.i('FCM 토큰 업데이트: $newToken');
+  });
+}
+
 void initBackgroundService() {
   final backgroundService = FlutterBackgroundService();
   var logger = Logger();
-  backgroundService.on('update').listen((event) {
+  backgroundService.on('update').listen((event) async {
     if (event == null) return;
+    Position pos = await LocationManager.getCurrentLocation();
+
     final locationController = GetXManager.getLocationController();
-    double longitude = event['longitude'];
-    double latitude = event['latitude'];
-    DateTime? date = DateTime.tryParse(event['current_date']);
-    locationController.setLatitude(latitude);
-    locationController.setLongitude(longitude);
-    locationController.setDateTime(date!);
+    locationController.setLatitude(pos.latitude);
+    locationController.setLongitude(pos.longitude);
+    locationController.setDateTime(DateTime.now());
   }, onError: (e, s) {
     logger.i('error listening for updates: $e, $s');
   }, onDone: () {

@@ -2,15 +2,13 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_background_service_android/flutter_background_service_android.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-
-import 'package:fof_dfp_mobile/common/location_manager.dart';
 
 class BackgroundService {
   static Future<void> initializeService() async {
@@ -51,7 +49,7 @@ class BackgroundService {
         isForegroundMode: true,
 
         notificationChannelId: 'my_foreground',
-        initialNotificationTitle: 'AWESOME SERVICE',
+        initialNotificationTitle: 'vheld',
         initialNotificationContent: 'Initializing',
         foregroundServiceNotificationId: 888,
       ),
@@ -117,29 +115,23 @@ class BackgroundService {
     });
 
     // bring to foreground
-    Timer.periodic(const Duration(seconds: 10), (timer) async {
+    Timer.periodic(const Duration(seconds: 120), (timer) async {
       if (service is AndroidServiceInstance) {
         if (await service.isForegroundService()) {
           /// OPTIONAL for use custom notification
           /// the notification id must be equals with AndroidConfiguration when you call configure() method.
-          flutterLocalNotificationsPlugin.show(
-            888,
-            'COOL SERVICE',
-            'Awesome ${DateTime.now()}',
-            const NotificationDetails(
-              android: AndroidNotificationDetails(
-                'my_foreground',
-                'MY FOREGROUND SERVICE',
-                icon: 'ic_bg_service_small',
-                ongoing: true,
-              ),
-            ),
-          );
-
-          // if you don't using custom notification, uncomment this
-          // service.setForegroundNotificationInfo(
-          //   title: "My App Service",
-          //   content: "Updated at ${DateTime.now()}",
+          // flutterLocalNotificationsPlugin.show(
+          //   888,
+          //   'COOL SERVICE',
+          //   'Awesome ${DateTime.now()}',
+          //   const NotificationDetails(
+          //     android: AndroidNotificationDetails(
+          //       'my_foreground',
+          //       'MY FOREGROUND SERVICE',
+          //       icon: 'ic_bg_service_small',
+          //       ongoing: true,
+          //     ),
+          //   ),
           // );
         }
       }
@@ -148,29 +140,24 @@ class BackgroundService {
       logger.i('FLUTTER BACKGROUND SERVICE: ${DateTime.now()}');
 
       // test using external plugin
-      // final deviceInfo = DeviceInfoPlugin();
-      // String? device;
-      // if (Platform.isAndroid) {
-      //   final androidInfo = await deviceInfo.androidInfo;
-      //   device = androidInfo.model;
-      // }
-
-      // if (Platform.isIOS) {
-      //   final iosInfo = await deviceInfo.iosInfo;
-      //   device = iosInfo.model;
-      // }
-      Position position = await LocationManager.getCurrentLocation();
-
-      if (position.latitude > 0.0) {
-        service.invoke(
-          'update',
-          {
-            "longitude": position.longitude,
-            "latitude": position.latitude,
-            'current_date': DateTime.now().toString(),
-          },
-        );
+      final deviceInfo = DeviceInfoPlugin();
+      String? device;
+      if (Platform.isAndroid) {
+        final androidInfo = await deviceInfo.androidInfo;
+        device = androidInfo.model;
       }
+
+      if (Platform.isIOS) {
+        final iosInfo = await deviceInfo.iosInfo;
+        device = iosInfo.model;
+      }
+      service.invoke(
+        'update',
+        {
+          "current_date": DateTime.now().toIso8601String(),
+          "device": device,
+        },
+      );
     });
   }
 }

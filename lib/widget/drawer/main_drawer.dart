@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fof_dfp_mobile/common/common_screen.dart';
 import 'package:fof_dfp_mobile/service/system/login_service.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,9 +11,7 @@ import 'package:fof_dfp_mobile/screen/login/login_screen.dart';
 import 'package:fof_dfp_mobile/common/dialog/common_dialog.dart';
 
 class MainDrawer extends StatefulWidget {
-  const MainDrawer({required this.onChangeScreen, super.key});
-
-  final Function(String, bool) onChangeScreen;
+  const MainDrawer({super.key});
 
   @override
   State<MainDrawer> createState() => _MainDrawerState();
@@ -31,7 +30,11 @@ class _MainDrawerState extends State<MainDrawer> {
         btnCaption: '확인',
       );
     }
-    widget.onChangeScreen(LoginScreen.screenName, true);
+    goToLoginScreen();
+  }
+
+  void goToLoginScreen() {
+    ScreenHandler.openScreen(kContext, LoginScreen.screenName);
     kScaffoldKey.currentState?.openDrawer();
   }
 
