@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:fof_dfp_mobile/widget/image_input.dart';
+import 'package:fof_dfp_mobile/widget/input_form.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
@@ -93,6 +94,7 @@ class _MainScreenState extends State<MainScreen> {
               );
             },
           ),
+          const InputForm(),
           Padding(
             padding: const EdgeInsets.only(left: 22, right: 22),
             child: Container(
