@@ -1,3 +1,4 @@
+import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:get/get.dart';
 
@@ -6,6 +7,14 @@ class LocationController extends GetxController {
   RxDouble latitude = 0.0.obs;
   RxString dateString = ''.obs;
   RxBool isLocation = false.obs;
+
+  void setPosition(Position pos) {
+    latitude = pos.latitude.obs;
+    longitude = pos.longitude.obs;
+    dateString = DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()).obs;
+    isLocation = true.obs;
+    update();
+  }
 
   void setIsLocation(bool value) {
     isLocation = value.obs;

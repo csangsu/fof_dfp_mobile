@@ -97,8 +97,8 @@ class BackgroundService {
     await preferences.setString("hello", "world");
 
     /// OPTIONAL when use custom notification
-    final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-        FlutterLocalNotificationsPlugin();
+    // final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    //     FlutterLocalNotificationsPlugin();
 
     if (service is AndroidServiceInstance) {
       service.on('setAsForeground').listen((event) {

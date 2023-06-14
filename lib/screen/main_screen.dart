@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:fof_dfp_mobile/widget/image_input.dart';
-import 'package:fof_dfp_mobile/widget/input_form.dart';
+import 'package:fof_dfp_mobile/widget/barcode_reader.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
@@ -21,7 +21,6 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   var logger = Logger();
-  var locationController = GetXManager.getLocationController();
 
   @override
   void dispose() {
@@ -94,7 +93,7 @@ class _MainScreenState extends State<MainScreen> {
               );
             },
           ),
-          const InputForm(),
+          const BarcodeReader(),
           Padding(
             padding: const EdgeInsets.only(left: 22, right: 22),
             child: Container(

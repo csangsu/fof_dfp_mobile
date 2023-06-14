@@ -49,9 +49,7 @@ Future<void> initLocationControllerAndGetCurrentLocation() async {
   Position pos = await LocationManager.getCurrentLocation();
   logger.i('Current Location is : ${pos.latitude}, ${pos.longitude}');
   final loc = GetXManager.getLocationController();
-  loc.setLatitude(pos.latitude);
-  loc.setLongitude(pos.longitude);
-  loc.setDateTime(DateTime.now());
+  loc.setPosition(pos);
 }
 
 Future<void> initFirebaseMessage() async {
@@ -79,10 +77,8 @@ void initBackgroundService() {
     if (event == null) return;
     Position pos = await LocationManager.getCurrentLocation();
 
-    final locationController = GetXManager.getLocationController();
-    locationController.setLatitude(pos.latitude);
-    locationController.setLongitude(pos.longitude);
-    locationController.setDateTime(DateTime.now());
+    final loc = GetXManager.getLocationController();
+    loc.setPosition(pos);
   }, onError: (e, s) {
     logger.i('error listening for updates: $e, $s');
   }, onDone: () {
