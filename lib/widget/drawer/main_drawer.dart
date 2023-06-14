@@ -34,7 +34,7 @@ class _MainDrawerState extends State<MainDrawer> {
   }
 
   void goToLoginScreen() {
-    ScreenHandler.openScreen(kContext, LoginScreen.screenName);
+    ScreenHandler.openScreen(LoginScreen.screenName);
     kScaffoldKey.currentState?.openDrawer();
   }
 

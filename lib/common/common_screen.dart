@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:fof_dfp_mobile/common/constants.dart';
 
 class ScreenHandler {
-  static void openScreen(BuildContext context, String screenName) {
+  static void openScreen(String screenName) {
     var screen = kScreenMap[screenName];
+    BuildContext context = kContext;
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => screen,
@@ -12,7 +13,7 @@ class ScreenHandler {
     );
   }
 
-  static void closeScreen(BuildContext context) {
-    Navigator.of(context).pop();
+  static void closeScreen() {
+    Navigator.of(kContext).pop();
   }
 }

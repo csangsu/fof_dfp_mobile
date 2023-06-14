@@ -130,7 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void close() {
-    ScreenHandler.closeScreen(context);
+    ScreenHandler.closeScreen();
   }
 
   Widget buildMobilePhone() {
