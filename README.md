@@ -15,4 +15,5 @@ For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
+firebase 추가 URL : https://firebase.google.com/docs/flutter/setup?hl=ko&platform=android
 프로젝트를 새로이 받으면 futterfire configure를 수행한다.
