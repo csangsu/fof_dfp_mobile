@@ -62,6 +62,11 @@ class _BarcodeReaderState extends State<BarcodeReader> {
                     setState(() {
                       barcode = ''; // 입력 초기화
                     });
+                  }
+                  if (event.data.logicalKey == LogicalKeyboardKey.backspace) {
+                    if (barcode.isNotEmpty) {
+                      barcode = barcode.substring(0, barcode.length - 1);
+                    }
                   } else {
                     // 다른 키 입력의 경우
                     setState(() {
