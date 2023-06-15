@@ -21,6 +21,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   var logger = Logger();
+  var cnt = 0.obs;
 
   @override
   void dispose() {
@@ -96,28 +97,32 @@ class _MainScreenState extends State<MainScreen> {
           const BarcodeReader(),
           Padding(
             padding: const EdgeInsets.only(left: 22, right: 22),
-            child: Container(
-              width: double.infinity,
-              height: 50,
-              decoration: BoxDecoration(
-                border: Border.all(
+            child: Obx(
+              () => Container(
+                width: double.infinity,
+                height: 50,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: const Color.fromARGB(255, 26, 183, 183),
+                  ),
                   color: const Color.fromARGB(255, 26, 183, 183),
                 ),
-                color: const Color.fromARGB(255, 26, 183, 183),
-              ),
-              child: TextButton(
-                onPressed: () async {
-                  AssertsPalyer.playAssert(
-                      audioFileName: 'assets/audio/beep.mp3');
-                },
-                child: Text(
-                  txtButon,
-                  style: GoogleFonts.notoSans(
-                    color: Colors.white,
-                    fontSize: 17,
-                    fontWeight: FontWeight.bold,
+                child: TextButton(
+                  onPressed: () async {
+                    Get.snackbar('Play Sound!', 'Play beep sound!');
+                    AssertsPalyer.playAssert(
+                        audioFileName: 'assets/audio/beep.mp3');
+                    cnt++;
+                  },
+                  child: Text(
+                    '$txtButon, $cnt',
+                    style: GoogleFonts.notoSans(
+                      color: Colors.white,
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
-                  textAlign: TextAlign.center,
                 ),
               ),
             ),
