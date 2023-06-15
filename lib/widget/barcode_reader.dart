@@ -59,9 +59,7 @@ class _BarcodeReaderState extends State<BarcodeReader> {
                   // 하드웨어 키의 RawKeyUpEvent를 처리
                   if (event.data.logicalKey == LogicalKeyboardKey.enter) {
                     // 바코드 입력이 완료된 경우
-                    setState(() {
-                      barcode = ''; // 입력 초기화
-                    });
+                    barcode = ''; // 입력 초기화
                   }
                   if (event.data.logicalKey == LogicalKeyboardKey.backspace) {
                     if (barcode.isNotEmpty) {
@@ -69,9 +67,7 @@ class _BarcodeReaderState extends State<BarcodeReader> {
                     }
                   } else {
                     // 다른 키 입력의 경우
-                    setState(() {
-                      barcode += event.character ?? ''; // 입력 추가
-                    });
+                    barcode += event.character ?? ''; // 입력 추가
                     logger.i(barcode);
                   }
                   _inputController.text = barcode;
