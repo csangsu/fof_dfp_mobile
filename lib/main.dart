@@ -2,7 +2,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_background_service/flutter_background_service.dart';
+import 'package:fof_dfp_mobile/common/workmanager_service.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -11,7 +11,6 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:logger/logger.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-import 'package:fof_dfp_mobile/common/background_service.dart';
 import 'package:fof_dfp_mobile/common/constants.dart';
 import 'package:fof_dfp_mobile/common/location_manager.dart';
 import 'package:fof_dfp_mobile/fof_dfp_mobile.dart';
@@ -19,6 +18,7 @@ import 'package:fof_dfp_mobile/providers/getx_manager.dart';
 import 'package:fof_dfp_mobile/service/system/login_service.dart';
 import 'package:fof_dfp_mobile/common/environment.dart';
 import 'package:fof_dfp_mobile/firebase_options.dart';
+import 'package:workmanager/workmanager.dart';
 
 AudioPlayer? player;
 
@@ -26,18 +26,24 @@ void main() async {
   await dotenv.load(fileName: Environment.envFileName);
 
   WidgetsFlutterBinding.ensureInitialized();
+  // Start Workmanager
+  WorkManagerService.initWorkManager();
+  WorkManagerService.registerPeriodicTask(
+    kFetchGeoLocation,
+    kFetchGeoLocation,
+    frequency: const Duration(seconds: 30),
+    existingWorkPolicy: ExistingWorkPolicy.replace,
+  );
+  // End Workmanager
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await initFirebaseMessage();
   await initLocationControllerAndGetCurrentLocation();
-  await BackgroundService.initializeService();
   await LoginRequestHandler.doAutoLogin();
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
-
-  initBackgroundService();
 
   player = AudioPlayer();
 
@@ -67,22 +73,6 @@ Future<void> initFirebaseMessage() async {
   }
   fcm.onTokenRefresh.listen((String newToken) {
     logger.i('FCM 토큰 업데이트: $newToken');
-  });
-}
-
-void initBackgroundService() {
-  final backgroundService = FlutterBackgroundService();
-  var logger = Logger();
-  backgroundService.on('update').listen((event) async {
-    if (event == null) return;
-    Position pos = await LocationManager.getCurrentLocation();
-
-    final loc = GetXManager.getLocationController();
-    loc.setPosition(pos);
-  }, onError: (e, s) {
-    logger.i('error listening for updates: $e, $s');
-  }, onDone: () {
-    logger.i('background listen closed');
   });
 }
 

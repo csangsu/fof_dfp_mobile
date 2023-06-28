@@ -18,6 +18,10 @@ const kAppStatusIsSaveUserId = 'APP_STATUS_SAVE_USER_ID';
 const kAppStatusUserId = 'APP_STATUS_USER_ID';
 const kAppStatusPassword = 'APP_STATUS_PASSWORD';
 
+// background start
+const kFetchGeoLocation = "fetchGeoLocation";
+// background end
+
 const List<String> phoneNations = [
   '+82',
   '+1',
