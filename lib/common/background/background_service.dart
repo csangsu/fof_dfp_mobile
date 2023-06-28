@@ -2,14 +2,34 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:ui';
 
-import 'package:device_info_plus/device_info_plus.dart';
-import 'package:flutter/material.dart';
-import 'package:fof_dfp_mobile/common/environment.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:logger/logger.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter/material.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_background_service_android/flutter_background_service_android.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:fof_dfp_mobile/common/environment.dart';
+import 'package:fof_dfp_mobile/common/location/location_manager.dart';
+import 'package:fof_dfp_mobile/providers/getx_manager.dart';
+
+void initBackgroundService() {
+  final backgroundService = FlutterBackgroundService();
+  var logger = Logger();
+  backgroundService.on('update').listen((event) async {
+    if (event == null) return;
+    Position pos = await LocationManager.getCurrentLocation();
+
+    final loc = GetXManager.getLocationController();
+    loc.setPosition(pos);
+  }, onError: (e, s) {
+    logger.i('error listening for updates: $e, $s');
+  }, onDone: () {
+    logger.i('background listen closed');
+  });
+}
 
 class BackgroundService {
   static Future<void> initializeService() async {
