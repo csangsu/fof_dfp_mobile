@@ -19,6 +19,7 @@ import 'package:fof_dfp_mobile/providers/getx_manager.dart';
 import 'package:fof_dfp_mobile/service/system/login_service.dart';
 import 'package:fof_dfp_mobile/common/environment.dart';
 import 'package:fof_dfp_mobile/firebase_options.dart';
+import 'package:fof_dfp_mobile/common/app_lifecycle_observer.dart';
 
 AudioPlayer? player;
 
@@ -36,6 +37,8 @@ void main() async {
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
+
+  WidgetsBinding.instance.addObserver(AppLifecycleObserver());
 
   initBackgroundService();
 

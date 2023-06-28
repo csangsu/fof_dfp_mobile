@@ -46,7 +46,7 @@ class BackgroundService {
 
         // auto start service
         autoStart: true,
-        isForegroundMode: true,
+        isForegroundMode: false,
 
         notificationChannelId: 'my_foreground',
         initialNotificationTitle: 'vheld',
