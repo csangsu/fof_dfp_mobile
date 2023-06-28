@@ -11,15 +11,15 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:logger/logger.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-import 'package:fof_dfp_mobile/common/background_service.dart';
+import 'package:fof_dfp_mobile/common/background/background_service.dart';
 import 'package:fof_dfp_mobile/common/constants.dart';
-import 'package:fof_dfp_mobile/common/location_manager.dart';
+import 'package:fof_dfp_mobile/common/location/location_manager.dart';
 import 'package:fof_dfp_mobile/fof_dfp_mobile.dart';
 import 'package:fof_dfp_mobile/providers/getx_manager.dart';
 import 'package:fof_dfp_mobile/service/system/login_service.dart';
 import 'package:fof_dfp_mobile/common/environment.dart';
 import 'package:fof_dfp_mobile/firebase_options.dart';
-import 'package:fof_dfp_mobile/common/app_lifecycle_observer.dart';
+import 'package:fof_dfp_mobile/common/lifecycle/app_lifecycle_observer.dart';
 
 AudioPlayer? player;
 

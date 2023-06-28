@@ -4,6 +4,7 @@ import 'dart:ui';
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:fof_dfp_mobile/common/environment.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
@@ -45,13 +46,13 @@ class BackgroundService {
         onStart: onStart,
 
         // auto start service
-        autoStart: true,
-        isForegroundMode: false,
+        autoStart: Environment.autoStart,
+        isForegroundMode: Environment.isForegroundMode,
 
-        notificationChannelId: 'my_foreground',
-        initialNotificationTitle: 'vheld',
-        initialNotificationContent: 'Initializing',
-        foregroundServiceNotificationId: 888,
+        notificationChannelId: Environment.notificationChannelId,
+        initialNotificationTitle: Environment.initialNotificationTitle,
+        initialNotificationContent: Environment.initialNotificationContent,
+        foregroundServiceNotificationId: Environment.dServiceNotificationId,
       ),
       iosConfiguration: IosConfiguration(
         // auto start service

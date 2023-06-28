@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fof_dfp_mobile/common/common_screen.dart';
+import 'package:fof_dfp_mobile/common/screen/common_screen.dart';
 import 'package:fof_dfp_mobile/service/system/login_service.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';

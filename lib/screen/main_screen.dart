@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
 
-import 'package:fof_dfp_mobile/common/audio_palyer.dart';
+import 'package:fof_dfp_mobile/common/audio/audio_palyer.dart';
 import 'package:fof_dfp_mobile/providers/getx_manager.dart';
 import 'package:fof_dfp_mobile/widget/common/login_info.dart';
 
