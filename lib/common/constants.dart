@@ -3,8 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:fof_dfp_mobile/common/environment.dart';
 
-var kNatoSansFont20 = GoogleFonts.notoSans(fontStyle: FontStyle.italic);
-
 GlobalKey<ScaffoldState> kScaffoldKey = GlobalKey<ScaffoldState>();
 
 final kContext = kScaffoldKey.currentContext!;
