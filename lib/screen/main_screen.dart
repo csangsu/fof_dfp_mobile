@@ -1,8 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:fof_dfp_mobile/widget/image_input.dart';
-import 'package:fof_dfp_mobile/widget/barcode_reader.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
@@ -10,6 +8,8 @@ import 'package:logger/logger.dart';
 import 'package:fof_dfp_mobile/common/audio/audio_palyer.dart';
 import 'package:fof_dfp_mobile/providers/getx_manager.dart';
 import 'package:fof_dfp_mobile/widget/common/login_info.dart';
+import 'package:fof_dfp_mobile/widget/image_input.dart';
+import 'package:fof_dfp_mobile/widget/barcode_reader.dart';
 
 class MainScreen extends StatefulWidget {
   static String screenName = "MainScreen";

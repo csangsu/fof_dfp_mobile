@@ -8,8 +8,8 @@ import 'package:logger/logger.dart';
 import 'package:fof_dfp_mobile/common/constants.dart';
 import 'package:fof_dfp_mobile/models/comon/response_result.dart';
 import 'package:fof_dfp_mobile/widget/circular_overlay.dart';
-import '../dialog/common_dialog.dart';
-import 'dio_singleton.dart';
+import 'package:fof_dfp_mobile/common/dialog/common_dialog.dart';
+import 'package:fof_dfp_mobile/common/request/dio_singleton.dart';
 
 class DioRequestHandler {
   static void startOverLay(String message) {
