@@ -6,9 +6,9 @@ class Environment {
       kReleaseMode ? ".env.production" : ".env.development";
   static String get apiUrl => dotenv.env['API_URL'] ?? 'http://10.5.37.15:9010';
 
-  static bool get autoStart => dotenv.env['BACKGROUND_AUTO_START'] as bool;
+  static bool get autoStart => dotenv.env['BACKGROUND_AUTO_START'] == 'true';
   static bool get isForegroundMode =>
-      dotenv.env['BACKGROUND_IS_FOREGROUND_MODE'] as bool;
+      dotenv.env['BACKGROUND_IS_FOREGROUND_MODE'] == 'true';
   static String get notificationChannelId =>
       dotenv.env['BACKGROUND_NOTIFICATION_CHANNELID'] ?? 'my_foreground';
   static String get initialNotificationTitle =>
@@ -16,5 +16,5 @@ class Environment {
   static String get initialNotificationContent =>
       dotenv.env['BACKGROUND_INITIAL_NOTIFICATION_CONTENT'] ?? 'Initializing';
   static int get dServiceNotificationId =>
-      dotenv.env['BACKGROUND_INITIAL_NOTIFICATION_CONTENT'] as int;
+      int.parse(dotenv.env['BACKGROUND_FOREGROUND_SERVICE_NOTIFICATIONID']!);
 }

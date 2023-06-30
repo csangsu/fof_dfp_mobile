@@ -7,6 +7,6 @@ class AppLifecycleObserver with WidgetsBindingObserver {
       // 앱이 백그라운드로 이동할 때 수행할 작업
     } else if (state == AppLifecycleState.resumed) {
       // 앱이 포그라운드로 돌아올 때 수행할 작업
-    } else if (state == AppLifecycleState.detached) {}
+    }
   }
 }

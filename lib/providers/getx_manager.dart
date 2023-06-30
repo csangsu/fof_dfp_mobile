@@ -12,7 +12,7 @@ class GetXManager {
   }
 
   static LocationController getLocationController() {
-    if (Get.isRegistered<LoginController>()) {
+    if (Get.isRegistered<LocationController>()) {
       return Get.find<LocationController>();
     }
     return Get.put(LocationController());
